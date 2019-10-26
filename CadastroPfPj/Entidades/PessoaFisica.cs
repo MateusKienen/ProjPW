@@ -7,15 +7,10 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class PessoaFisica : Pessoa, ICrud
+    public class PessoaFisica : Pessoa
     {
 
         public string CPF { get; set; }
-
-        public void Alterar()
-        {
-            throw new NotImplementedException();
-        }
 
         public void Excluir(string cpf, int opcao)
         {

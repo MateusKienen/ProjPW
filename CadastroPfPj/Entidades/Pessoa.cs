@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public abstract class Pessoa
+    public abstract class Pessoa : EntidadeBase
     {
         #region Properties
 

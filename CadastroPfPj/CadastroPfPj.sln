@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entidades", "Entidades\Enti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aplix", "Aplix\Aplix.csproj", "{1FE27214-8CEF-4FCE-99C4-351A83742A7D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contexto", "Contexto", "{07BAD497-D641-4FC3-AA50-261D90579399}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalDb", "LocalDb\LocalDb.csproj", "{1DBC3996-6360-44C1-B991-744300C484F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +29,10 @@ Global
 		{1FE27214-8CEF-4FCE-99C4-351A83742A7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FE27214-8CEF-4FCE-99C4-351A83742A7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FE27214-8CEF-4FCE-99C4-351A83742A7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DBC3996-6360-44C1-B991-744300C484F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DBC3996-6360-44C1-B991-744300C484F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DBC3996-6360-44C1-B991-744300C484F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DBC3996-6360-44C1-B991-744300C484F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +40,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{6F45C7DA-8379-45E9-8B27-CA0C10ACD8B5} = {DDE4D2CC-A35C-4F00-898F-FEB7E184798F}
 		{1FE27214-8CEF-4FCE-99C4-351A83742A7D} = {5E037A31-D908-4EEB-A5A1-E5868B6F678F}
+		{1DBC3996-6360-44C1-B991-744300C484F5} = {07BAD497-D641-4FC3-AA50-261D90579399}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3A99B9F3-FAB6-4541-B54E-95942B3F3056}

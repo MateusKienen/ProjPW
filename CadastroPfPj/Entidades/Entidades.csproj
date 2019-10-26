@@ -41,9 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntidadeBase.cs" />
     <Compile Include="Excecoes.cs" />
     <Compile Include="Gravacao.cs" />
-    <Compile Include="Interfaces\ICrud.cs" />
+    <Compile Include="Interfaces\IRepositorio.cs" />
     <Compile Include="Pessoa.cs" />
     <Compile Include="PessoaFisica.cs" />
     <Compile Include="PessoaJuridica.cs" />

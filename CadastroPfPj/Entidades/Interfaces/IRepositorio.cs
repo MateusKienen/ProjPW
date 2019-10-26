@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Entidades.Interfaces
 {
-    interface ICrud
+    public interface IRepositorio<T>
     {
-        void Inserir();
-        void Excluir(string item, int opcao);
-        void Alterar();
-        string Listar();
+        List<T> ListaTodos();
+        void Inserir(T item);
+        void Deletar(int id);
+
     }
 }

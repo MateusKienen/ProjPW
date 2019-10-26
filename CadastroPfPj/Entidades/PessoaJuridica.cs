@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class PessoaJuridica : Pessoa, ICrud
+    public class PessoaJuridica : Pessoa
     {
         public string CNPJ { get; set; }
 

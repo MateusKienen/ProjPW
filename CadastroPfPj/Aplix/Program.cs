@@ -1,4 +1,5 @@
 ﻿using Entidades;
+using LocalDb.Repositorio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace Aplix
         {
             PessoaJuridica pj;
             PessoaFisica pf;
+            RepositorioBase<PessoaFisica> repPf;
+            RepositorioBase<PessoaJuridica> repPj;
 
             int opcao = 0;
             do
@@ -20,13 +23,26 @@ namespace Aplix
                 MontaMenu();
                 Console.WriteLine("Digite uma opção: ");
                 opcao = Convert.ToInt32(Console.ReadLine());
+              
 
                 switch (opcao)
                 {
                     case 1:
                         Console.WriteLine("Preencha os dados abaixo:");
                         try
+
                         {
+                            //pf = new PessoaFisica();
+                            //Console.WriteLine("Nome: ");
+                            //pf.Nome = Console.ReadLine();
+                            //Console.WriteLine("Data de Nascimento");
+                            //pf.DataNascimento = Convert.ToDateTime(Console.ReadLine());
+                            //Console.WriteLine("Endereço");
+                            //pf.Endereco = Console.ReadLine();
+                            //Console.WriteLine("CPF");
+                            //pf.CPF = Console.ReadLine();
+                            //pf.Inserir();
+
                             pf = new PessoaFisica();
                             Console.WriteLine("Nome: ");
                             pf.Nome = Console.ReadLine();
@@ -36,7 +52,10 @@ namespace Aplix
                             pf.Endereco = Console.ReadLine();
                             Console.WriteLine("CPF");
                             pf.CPF = Console.ReadLine();
-                            pf.Inserir();
+                            repPf = new RepositorioBase<PessoaFisica>();
+                            repPf.Inserir(pf);
+                            Console.WriteLine("Inserido no Banco de dados");
+
 
                         }
                         catch (Exception ex)
@@ -48,6 +67,11 @@ namespace Aplix
                         Console.WriteLine("Preencha os dados abaixo:");
                         try
                         {
+
+                            // Estruura para inserir em arquivo
+
+                            /**
+
                             pj = new PessoaJuridica();
                             Console.WriteLine("Nome: ");
                             pj.Nome = Console.ReadLine();
@@ -58,6 +82,21 @@ namespace Aplix
                             Console.WriteLine("CNPJ");
                             pj.CNPJ = Console.ReadLine();
                             pj.Inserir();
+                            */
+
+                            pj = new PessoaJuridica();
+                            Console.WriteLine("Nome: ");
+                            pj.Nome = Console.ReadLine();
+                            Console.WriteLine("Data de Criação");
+                            pj.DataNascimento = Convert.ToDateTime(Console.ReadLine());
+                            Console.WriteLine("Endereço");
+                            pj.Endereco = Console.ReadLine();
+                            Console.WriteLine("CNPJ");
+                            pj.CNPJ = Console.ReadLine();
+                            repPj = new RepositorioBase<PessoaJuridica>();
+                            repPj.Inserir(pj);
+                            Console.WriteLine("Inserido no Banco de dados");
+
 
                         }
                         catch (Exception ex)
@@ -67,46 +106,49 @@ namespace Aplix
                         break;
                     case 3:
                         Console.WriteLine("Lista de PF");
-                        Console.WriteLine(Gravacao.Listar(TipoPessoa.Fisica));
+                        repPf = ListarPf();
+                        //Console.WriteLine(Gravacao.Listar(TipoPessoa.Fisica));
                         Console.WriteLine("\n\nPressione qualquer tecla para retornar ao Menu");
                         Console.ReadKey();
                         break;
                     case 4:
                         Console.WriteLine("Lista de PJ");
-                        Console.WriteLine(Gravacao.Listar(TipoPessoa.Juridica));
+
+                        repPj = ListarPj();
+                        //Console.WriteLine(Gravacao.Listar(TipoPessoa.Juridica));
                         Console.WriteLine("\n\nPressione qualquer tecla para retornar ao Menu");
                         Console.ReadKey();
                         break;
                     case 5:
                         Console.WriteLine("Lista de Pessoas Cadastradas");
-                        Console.WriteLine(Gravacao.Listar(TipoPessoa.Fisica | TipoPessoa.Juridica));
+                        ListarPf();
+                        ListarPj();
+
+                        //Console.WriteLine(Gravacao.Listar(TipoPessoa.Fisica | TipoPessoa.Juridica));
                         Console.WriteLine("\n\nPressione qualquer tecla para retornar ao Menu");
                         Console.ReadKey();
                         break;
                     case 6:
-                        Console.WriteLine("Digite o CPF que deseja excluir: ");
-                        if (Gravacao.Excluir(Console.ReadLine(), 6))
-                        {
-                            Console.WriteLine("Registro excluído com sucesso");
-                        }
+                        ListarPf();
+                        Console.WriteLine("Digite o ID da pessoa que deseja excluir: ");
+                        repPf = new RepositorioBase<PessoaFisica>();
+                        repPf.Deletar(Convert.ToInt32(Console.ReadLine()));
+
                         Console.WriteLine("\nPressione qualquer tecla para retornar ao Menu");
                         Console.ReadKey();
                         break;
                     case 7:
-                        Console.WriteLine("Digite o CNPJ que deseja excluir: ");
-                        if(Gravacao.Excluir(Console.ReadLine(), 7))
-                        {
-                            Console.WriteLine("Registro excluído com sucesso");
-                        }
+                        ListarPj();
+                        Console.WriteLine("Digite o ID da empresa que deseja excluir: ");
+                        repPj = new RepositorioBase<PessoaJuridica>();
+                        repPj.Deletar(Convert.ToInt32(Console.ReadLine()));
+
                         Console.WriteLine("\nPressione qualquer tecla para retornar ao Menu");
                         Console.ReadKey();
                         break;
                     case 8:
                         Console.WriteLine("Excluíndo registros");
-                        if (Gravacao.Excluir())
-                        {
-                            Console.WriteLine("Registros excluídos");
-                        }
+                        
                         Console.WriteLine("\nPressione qualquer tecla para retornar ao Menu");
                         Console.ReadKey();
                         break;
@@ -117,6 +159,30 @@ namespace Aplix
                 Console.ReadLine();
                 Console.Clear();
             } while (opcao != 0);
+        }
+
+        private static RepositorioBase<PessoaFisica> ListarPf()
+        {
+            RepositorioBase<PessoaFisica> repPf = new RepositorioBase<PessoaFisica>();
+            List<PessoaFisica> listapf = repPf.ListaTodos();
+            foreach (var item in listapf)
+            {
+                Console.WriteLine($"{item.Id} - {item.Nome} - {item.CPF} - {item.DataNascimento} - {item.Endereco}");
+            }
+
+            return repPf;
+        }
+
+        private static RepositorioBase<PessoaJuridica> ListarPj()
+        {
+            RepositorioBase<PessoaJuridica> repPj = new RepositorioBase<PessoaJuridica>();
+            List<PessoaJuridica> listapj = repPj.ListaTodos();
+            foreach (var item in listapj)
+            {
+                Console.WriteLine($"{item.Id} - {item.Nome} - {item.CNPJ} - {item.DataNascimento} - {item.Endereco}");
+            }
+
+            return repPj;
         }
 
         private static void MontaMenu()
